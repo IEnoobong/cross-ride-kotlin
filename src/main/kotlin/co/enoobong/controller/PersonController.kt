@@ -2,6 +2,7 @@ package co.enoobong.controller
 
 import co.enoobong.model.Person
 import co.enoobong.service.PersonService
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api/person", produces = [MediaType.APPLICATION_JSON_VALUE])
 class PersonController(private val personService: PersonService) {
 
     @PostMapping
