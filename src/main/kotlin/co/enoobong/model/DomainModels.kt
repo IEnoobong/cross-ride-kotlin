@@ -45,7 +45,7 @@ class Person(
     var registrationDate: LocalDateTime = LocalDateTime.now()
 
     @PrePersist
-    fun prePersist() {
+    private fun prePersist() {
         registrationNumber = UUID.randomUUID().toString()
         registrationDate = LocalDateTime.now()
     }

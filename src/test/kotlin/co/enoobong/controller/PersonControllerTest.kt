@@ -25,10 +25,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @WebMvcTest(PersonController::class)
 @ExtendWith(SpringExtension::class)
 @Import(value = [GeneralConfig::class])
-class PersonControllerTest(@Autowired val mockMvc: MockMvc) {
+class PersonControllerTest(@Autowired private val mockMvc: MockMvc) {
 
     @MockBean
-    lateinit var personService: PersonService
+    private lateinit var personService: PersonService
 
     @Test
     fun registerPerson() {

@@ -15,17 +15,17 @@ class RideServiceImpl(private val rideRepository: RideRepository, private val pe
     RideService {
 
     override fun save(rideDTO: RideDTO): Ride {
-        val startTime = rideDTO.startTime!!
-        val endTime = rideDTO.endTime!!
+        val startTime = rideDTO.startTime
+        val endTime = rideDTO.endTime
 
         if (endTime.isBefore(startTime) || endTime.isEqual(startTime)) {
-            throw InvalidTimeException("endTime $endTime cannot be before or equal to startTime : $startTime")
+            throw InvalidTimeException("endTime : $endTime cannot be before or equal to startTime : $startTime")
         }
 
-        val driver = personRepository.findById(rideDTO.driverId!!)
+        val driver = personRepository.findById(rideDTO.driverId)
             .orElseThrow { ResourceNotFoundException("Driver", "driverId", rideDTO.driverId) }
 
-        val rider = personRepository.findById(rideDTO.riderId!!)
+        val rider = personRepository.findById(rideDTO.riderId)
             .orElseThrow { ResourceNotFoundException("Rider", "riderId", rideDTO.riderId) }
 
         val ride = rideDTO.toRide(driver, rider)

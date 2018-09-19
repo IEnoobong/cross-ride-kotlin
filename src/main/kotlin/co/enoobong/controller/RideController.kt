@@ -20,9 +20,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api", produces = [MediaType.APPLICATION_JSON_VALUE])
-class RideController(
-    private val rideService: RideService
-) {
+class RideController(private val rideService: RideService) {
 
     @PostMapping(path = ["ride"])
     fun createNewRide(@RequestBody @Valid rideDTO: RideDTO, bindingResult: BindingResult): ResponseEntity<*> {
