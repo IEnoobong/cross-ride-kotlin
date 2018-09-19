@@ -22,4 +22,3 @@ Cross-Ride allows its users to register as drivers and/or riders. Registered dri
  ## This helped you and you want to buy me Jollof-Rice?
  Here's my link https://payme.ng/ienoobong :)
  
-    
