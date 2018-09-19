@@ -8,21 +8,21 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Past
 
 class RideDTO(
-    @field:Min(value = 1, message = "distance is compulsory and must be greater than zero")
+    @field:Min(value = 1, message = "{distance.compulsory}")
     var distance: Long,
 
-    @field:Min(value = 1, message = "driverId is compulsory")
+    @field:Min(value = 1, message = "{driverId.compulsory}")
     var driverId: Long,
 
-    @field:Min(value = 1, message = "riderId is compulsory")
+    @field:Min(value = 1, message = "{riderId.compulsory}")
     var riderId: Long
 ) {
 
-    @field:NotNull(message = "startTime is compulsory")
-    @field:Past(message = "startTime must be a time in the past")
+    @field:NotNull(message = "{startTime.compulsory}")
+    @field:Past(message = "{startTime.must.past}")
     lateinit var startTime: LocalDateTime
 
-    @field:NotNull(message = "endTime is compulsory")
+    @field:NotNull(message = "{endTime.compulsory}")
     lateinit var endTime: LocalDateTime
 
     fun toRide(driver: Person, rider: Person): Ride {

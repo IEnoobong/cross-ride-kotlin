@@ -12,6 +12,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
@@ -32,13 +33,19 @@ class RideControllerTest(@Autowired private val mockMvc: MockMvc) {
     @MockBean
     private lateinit var rideService: RideService
 
+    @Value("\${distance.compulsory}")
+    private lateinit var distanceErrorMessage: String
+
+    @Value("\${driverId.compulsory}")
+    private lateinit var driverIdErrorMessage: String
+
+    @Value("\${riderId.compulsory}")
+    private lateinit var riderIdErrorMessage: String
+
     companion object {
         private const val DRIVER_ID = 1L
         private const val RIDER_ID = 2L
         private const val RIDE_ID = 1L
-        private const val RIDER_ERROR_MESSAGE = "riderId is compulsory"
-        private const val DRIVER_ERROR_MESSAGE = "driverId is compulsory"
-        private const val DISTANCE_ERROR_MESSAGE = "distance is compulsory and must be greater than zero"
         private val mockTime = LocalDateTime.parse("2018-09-11T09:52:28")
     }
 
@@ -67,9 +74,9 @@ class RideControllerTest(@Autowired private val mockMvc: MockMvc) {
 
         mockMvc.perform(post("/api/ride").contentType(MediaType.APPLICATION_JSON).content(rideDTO.convertToJsonString()))
             .andExpect(status().isBadRequest)
-            .andExpect(jsonPath("\$.driverId").value(DRIVER_ERROR_MESSAGE))
-            .andExpect(jsonPath("\$.riderId").value(RIDER_ERROR_MESSAGE))
-            .andExpect(jsonPath("\$.distance").value(DISTANCE_ERROR_MESSAGE))
+            .andExpect(jsonPath("\$.driverId").value(driverIdErrorMessage))
+            .andExpect(jsonPath("\$.riderId").value(riderIdErrorMessage))
+            .andExpect(jsonPath("\$.distance").value(distanceErrorMessage))
     }
 
     @Test
