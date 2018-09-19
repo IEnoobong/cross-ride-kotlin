@@ -1,4 +1,4 @@
-#Cross-Ride
+# Cross-Ride
 
 Cross-Ride is the backend for sample ride-sharing application. Uses in Spring, Kotlin, in memory H2 database and 
 Junit5 for testing
