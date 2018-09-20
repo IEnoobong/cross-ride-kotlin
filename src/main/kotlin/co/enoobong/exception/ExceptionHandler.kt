@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class ExceptionHandler(private val logger: Logger) {
 
     @ExceptionHandler
-    fun handleGlobalException(exception: Exception): ResponseEntity<*> {
+    fun handleGlobalException(exception: Exception): ResponseEntity<HashMap<String, String>> {
         logger.error("Exception: Unable to process this request. ", exception)
 
         val response = hashMapOf("message" to "Unable to process this request.")
