@@ -1,0 +1,46 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Eno" id="1_create_tables">
+        <createTable tableName="person">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_person" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="registration_number" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="registration_date" type="DATETIME">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="ride">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_ride" />
+            </column>
+            <column name="start_time" type="DATETIME">
+                <constraints nullable="false" />
+            </column>
+            <column name="end_time" type="DATETIME">
+                <constraints nullable="false" />
+            </column>
+            <column name="distance" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="driver_id" type="BIGINT" />
+            <column name="rider_id" type="BIGINT" />
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="ride"
+            constraintName="fk_address_person_driver" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+            referencedTableName="person" />
+        <addForeignKeyConstraint baseColumnNames="rider_id" baseTableName="ride"
+            constraintName="fk_address_person_rider" onDelete="CASCADE" onUpdate="RESTRICT" referencedColumnNames="id"
+            referencedTableName="person" />
+    </changeSet>
+</databaseChangeLog>
