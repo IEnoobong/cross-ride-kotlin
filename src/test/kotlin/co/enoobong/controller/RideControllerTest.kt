@@ -42,13 +42,10 @@ class RideControllerTest(@Autowired private val mockMvc: MockMvc) {
     @Value("\${riderId.compulsory}")
     private lateinit var riderIdErrorMessage: String
 
-    companion object {
-        private const val DRIVER_ID = 1L
-        private const val RIDER_ID = 2L
-        private const val RIDE_ID = 1L
-        private val mockTime = LocalDateTime.parse("2018-09-11T09:52:28")
-    }
-
+    private val DRIVER_ID = 1L
+    private val RIDER_ID = 2L
+    private val RIDE_ID = 1L
+    private val mockTime = LocalDateTime.parse("2018-09-11T09:52:28")
 
     @Test
     fun createNewRide() {

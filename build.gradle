@@ -68,6 +68,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 
+	testImplementation 'com.openpojo:openpojo:0.8.10'
 	testImplementation 'nl.jqno.equalsverifier:equalsverifier:2.4.8'
 	testImplementation'org.springframework.boot:spring-boot-starter-aop'
 	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
