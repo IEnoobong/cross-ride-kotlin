@@ -93,7 +93,7 @@ class RideControllerTest(@Autowired private val mockMvc: MockMvc) {
         whenever(rideService.getTopDrivers(count, mockTime, mockTime)).thenReturn(topDriverDTOS)
 
         // Act & Assert
-        mockMvc.perform(get("/api/top-rides/?startTime=$mockTime&endTime=$mockTime"))
+        mockMvc.perform(get("/api/ride/top-rides/?startTime=$mockTime&endTime=$mockTime"))
             .andExpect(status().isOk)
             .andExpect(jsonPath("\$.[0].email").value(topDriverDTO.getEmail()))
             .andExpect(jsonPath("\$.[0].totalRideDurationInMins").value(topDriverDTO.getTotalRideDurationInMins()))

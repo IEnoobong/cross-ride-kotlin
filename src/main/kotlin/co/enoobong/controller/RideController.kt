@@ -19,10 +19,10 @@ import java.time.LocalDateTime
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/api", produces = [MediaType.APPLICATION_JSON_VALUE])
+@RequestMapping("/api/ride", produces = [MediaType.APPLICATION_JSON_VALUE])
 class RideController(private val rideService: RideService) {
 
-    @PostMapping(path = ["ride"])
+    @PostMapping
     fun createNewRide(@RequestBody @Valid rideDTO: RideDTO, bindingResult: BindingResult): ResponseEntity<*> {
         if (bindingResult.hasFieldErrors()) {
             val errorFieldToMessage = bindingResult.fieldErrors.associateBy({ it.field }, { it.defaultMessage })
@@ -33,12 +33,12 @@ class RideController(private val rideService: RideService) {
         return ResponseEntity.ok(savedRide)
     }
 
-    @GetMapping(path = ["ride/{ride-id}"])
+    @GetMapping(path = ["{ride-id}"])
     fun getRideById(@PathVariable(name = "ride-id") rideId: Long): Ride {
         return rideService.findById(rideId)
     }
 
-    @RequestMapping("top-rides")
+    @GetMapping("top-rides")
     fun getTopDriver(
         @RequestParam(value = "max", defaultValue = "5") count: Long,
         @RequestParam(value = "startTime") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") startTime: LocalDateTime,
